@@ -1,64 +1,100 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/database');
+﻿require("dotenv").config();
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
 
-// Route imports
-const projectRoutes = require('./routes/projects');
-const authRoutes = require('./routes/auth');
-const contactRoutes = require('./routes/contact');
-
-// Initialize app
 const app = express();
 
-// Connect to database
-connectDB();
+// Connect to database directly (no config import)
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+        console.log("✅ MongoDB Connected Successfully");
+    })
+    .catch(err => {
+        console.error("❌ MongoDB Connection Error:", err);
+    });
 
 // Middleware
-app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "..")));
 
-// Routes
-app.use('/api/projects', projectRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/contact', contactRoutes);
+// Create email transporter
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
-// Home route
-app.get('/', (req, res) => {
-    res.json({
-        message: '🚀 Portfolio Backend API is running!',
-        version: '1.0.0',
-        endpoints: {
-            projects: '/api/projects',
-            auth: '/api/auth',
-            contact: '/api/contact'
+// Contact API Route
+app.post("/api/contact", async (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+
+        console.log("📧 Received contact form from:", name);
+
+        if (!name || !email || !message) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
         }
-    });
+
+        const mailOptions = {
+            from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+            to: process.env.EMAIL_USER,
+            replyTo: email,
+            subject: `📱 New Message from ${name}`,
+            text: `
+Name: ${name}
+Email: ${email}
+Message: ${message}
+
+Sent from your portfolio website
+            `,
+            html: `
+<div style="font-family: Arial, sans-serif;">
+    <h2 style="color: #2563eb;">📱 New Portfolio Message</h2>
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Message:</strong></p>
+    <p>${message}</p>
+</div>
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log("✅ Email sent to:", process.env.EMAIL_USER);
+
+        res.json({
+            success: true,
+            message: "Message sent successfully! I'll get back to you soon."
+        });
+
+    } catch (error) {
+        console.error("❌ Email error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error sending message. Please try again."
+        });
+    }
 });
 
-// 404 handler
-app.use('*', (req, res) => {
-    res.status(404).json({
-        success: false,
-        message: 'Route not found'
-    });
+// API routes
+app.get("/api/contact", (req, res) => {
+    res.json({ success: true, message: "Contact API is working!" });
 });
 
-// Error handling middleware
-app.use((error, req, res, next) => {
-    console.error('Error:', error);
-    res.status(500).json({
-        success: false,
-        message: 'Internal server error',
-        error: process.env.NODE_ENV === 'development' ? error.message : {}
-    });
+app.get("/api/projects", (req, res) => {
+    res.json({ success: true, message: "Projects API is working!", data: [] });
 });
 
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`🎯 Server running on port ${PORT}`);
-    console.log(`🌐 Environment: ${process.env.NODE_ENV}`);
-    console.log(`🔗 Base URL: http://localhost:${PORT}`);
+// Serve me.html for all routes (SPA)
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "me.html"));
 });
+
+// Export for Vercel
+module.exports = app;
