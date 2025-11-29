@@ -6,7 +6,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "*.pdf",
+      "src": "*.pdf", 
       "use": "@vercel/static"
     },
     {
