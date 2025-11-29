@@ -1,0 +1,652 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton Asha - Digital Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .active {
+            color: #3b82f6;
+        }
+        
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(8rem);
+        }
+        
+        .section {
+            transition: transform 1s, opacity 1s;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .cv-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .download-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-pic {
+            transition: transform 0.5s ease;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+        
+        .message-preview {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-pic {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-500">Newton Asha</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-600 hover:text-blue-500 transition-colors duration-300">Home</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-blue-500 transition-colors duration-300">About</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-blue-500 transition-colors duration-300">Skills</a>
+                <a href="#projects" class="nav-link text-gray-600 hover:text-blue-500 transition-colors duration-300">Projects</a>
+                <a href="#cv" class="nav-link text-gray-600 hover:text-blue-500 transition-colors duration-300">My CV</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-500 transition-colors duration-300">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white py-4 px-6 shadow-lg">
+            <a href="#home" class="block py-2 text-gray-600 hover:text-blue-500 transition-colors duration-300">Home</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-500 transition-colors duration-300">About</a>
+            <a href="#skills" class="block py-2 text-gray-600 hover:text-blue-500 transition-colors duration-300">Skills</a>
+            <a href="#projects" class="block py-2 text-gray-600 hover:text-blue-500 transition-colors duration-300">Projects</a>
+            <a href="#cv" class="block py-2 text-gray-600 hover:text-blue-500 transition-colors duration-300">My CV</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-500 transition-colors duration-300">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16 bg-gradient-to-r from-blue-50 to-indigo-100">
+        <div class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="text-blue-500">Newton Asha</span></h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-600 mb-6">Full Stack Developer</h2>
+                <p class="text-lg text-gray-600 mb-8 max-w-lg">I create beautiful, functional websites and applications with a focus on user experience and clean code.</p>
+                <div class="flex space-x-4 flex-wrap gap-4">
+                    <a href="#projects" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300">View My Work</a>
+                    <a href="#contact" class="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300">Contact Me</a>
+                    <a href="#cv" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 download-btn">
+                        <i class="fas fa-download mr-2"></i>Download CV
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <!-- Profile Picture -->
+                <img src="./asha.jpg" alt="Newton Asha" class="profile-pic">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <!-- Profile Picture -->
+                    <img src="./asha.jpg" alt="Newton Asha" class="profile-pic">
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h3 class="text-2xl font-semibold mb-4">My Journey</h3>
+                    <p class="text-gray-600 mb-6">I'm a passionate full-stack developer with experience building web applications. I specialize in creating responsive, user-friendly interfaces and robust backend systems.</p>
+                    <p class="text-gray-600 mb-6">My journey in technology began with a curiosity for how things work, and has evolved into a career dedicated to building digital solutions that make a difference.</p>
+                    <p class="text-gray-600 mb-8">When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">HTML/CSS</div>
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">JavaScript</div>
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">React</div>
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">Node.js</div>
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">Python</div>
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">MongoDB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-100 section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-laptop-code text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Frontend Development</h3>
+                    <p class="text-gray-600 mb-4">Creating responsive and interactive user interfaces with modern frameworks.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded">React</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded">Vue.js</span>
+                        <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded">Tailwind CSS</span>
+                    </div>
+                </div>
+                
+                <!-- Skill 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-server text-green-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Backend Development</h3>
+                    <p class="text-gray-600 mb-4">Building scalable server-side applications and APIs.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded">Node.js</span>
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded">Express</span>
+                        <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded">MongoDB</span>
+                    </div>
+                </div>
+                
+                <!-- Skill 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-purple-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Mobile Development</h3>
+                    <p class="text-gray-600 mb-4">Developing cross-platform mobile applications.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded">React Native</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded">Flutter</span>
+                        <span class="bg-purple-100 text-purple-800 text-sm px-3 py-1 rounded">iOS/Android</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                    <div class="h-48 bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-600 mb-4">A full-featured online store with product catalog, shopping cart, and payment integration.</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-blue-500 font-medium hover:text-blue-700 transition-colors duration-300">View Details</a>
+                            <div class="flex space-x-2">
+                                <i class="fab fa-github text-gray-500"></i>
+                                <i class="fas fa-external-link-alt text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                    <div class="h-48 bg-gradient-to-r from-green-400 to-teal-500 flex items-center justify-center">
+                        <i class="fas fa-tasks text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Task Management App</h3>
+                        <p class="text-gray-600 mb-4">A collaborative project management tool with real-time updates and team features.</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-blue-500 font-medium hover:text-blue-700 transition-colors duration-300">View Details</a>
+                            <div class="flex space-x-2">
+                                <i class="fab fa-github text-gray-500"></i>
+                                <i class="fas fa-external-link-alt text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover">
+                    <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Analytics Dashboard</h3>
+                        <p class="text-gray-600 mb-4">A data visualization platform with interactive charts and reporting features.</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-blue-500 font-medium hover:text-blue-700 transition-colors duration-300">View Details</a>
+                            <div class="flex space-x-2">
+                                <i class="fab fa-github text-gray-500"></i>
+                                <i class="fas fa-external-link-alt text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv" class="py-20 cv-section text-white section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">My Curriculum Vitae</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h3 class="text-2xl font-semibold mb-6">Professional Experience & Education</h3>
+                    <p class="text-blue-100 mb-6">Download my complete CV to learn more about my professional background, education, and accomplishments.</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Full Stack Developer</p>
+                                <p class="text-blue-100">1+ Years Experience</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Software Engineering</p>
+                                <p class="text-blue-100">MTTI Kariobagi, 2024</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Professional Certifications</p>
+                                <p class="text-blue-100">AWS, React, Node.js, and more</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button id="download-cv" class="bg-white text-purple-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors duration-300 download-btn">
+                            <i class="fas fa-download mr-2"></i>Download CV (PDF)
+                        </button>
+                        <button id="view-cv" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-purple-700 px-6 py-3 rounded-lg font-medium transition-colors duration-300">
+                            <i class="fas fa-eye mr-2"></i>View Online
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/5 flex justify-center">
+                    <div class="relative w-64 h-80 bg-white bg-opacity-10 rounded-xl shadow-2xl flex flex-col items-center justify-center p-6 border border-white border-opacity-20">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-file-pdf text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 text-center">Asha Curriculum Vitae</h3>
+                        <p class="text-blue-100 text-center mb-4">Full Stack Developer</p>
+                        <div class="w-full bg-white bg-opacity-20 h-1 rounded-full mb-4"></div>
+                        <p class="text-sm text-blue-100 text-center">Last updated: September 2024</p>
+                        <p class="text-sm text-blue-100 text-center">File size: 2.1 MB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-100 section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Get In Touch</h2>
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6">Let's work together</h3>
+                    <p class="text-gray-600 mb-8">I'm always interested in new opportunities and collaborations. Whether you have a project in mind or just want to say hello, feel free to reach out!</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-blue-500"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Email</p>
+                                <p class="text-gray-600">ombuyanewton@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-blue-500"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Phone</p>
+                                <p class="text-gray-600">+254 (743) 270-114</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-blue-500"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Location</p>
+                                <p class="text-gray-600">Nairobi, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-xl font-semibold mb-4">Follow Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://twitter.com/j_kochia" target="_blank" class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/la.flame.drone" target="_blank" class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center text-white hover:bg-pink-600 transition-colors duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://github.com/jakochia" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-gray-900 transition-colors duration-300">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/newton-ombuya-776566356" target="_blank" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-white p-6 rounded-xl shadow-md mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Send me a message</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your Name" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Your Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your.email@example.com" required>
+                            </div>
+                            
+                            <div>
+                                <label for="message" class="block text-gray-700 mb-2">Your Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Hello, I would like to..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors duration-300">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Recent Messages</h3>
+                        <div id="message-preview" class="message-preview space-y-4">
+                            <p class="text-gray-500 text-center py-4">No messages yet. Send a message to see it here!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Newton Asha. All rights reserved.</p>
+            <p class="mt-2 text-gray-400">Designed and built with ❤️</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Active navigation link
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('section-hidden');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.add('section-hidden');
+            observer.observe(section);
+        });
+
+        // CV Download functionality - USING ASHA-CURRICULUM-VITAE
+        document.getElementById('download-cv').addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.href = './Asha-Curriculum-vitae.pdf';
+            link.download = 'Asha-Curriculum-Vitae.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        document.getElementById('view-cv').addEventListener('click', function() {
+            window.open('./Asha-Curriculum-vitae.pdf', '_blank');
+        });
+
+        // Contact Form Functionality
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const resultDiv = document.getElementById('result');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Create message preview
+                    const messagePreview = document.getElementById('message-preview');
+                    
+                    // Remove placeholder text if it exists
+                    if (messagePreview.querySelector('p.text-gray-500')) {
+                        messagePreview.innerHTML = '';
+                    }
+                    
+                    // Add new message
+                    const messageElement = document.createElement('div');
+                    messageElement.className = 'bg-blue-50 p-4 rounded-lg border border-blue-100';
+                    messageElement.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-semibold text-blue-700">${formData.name}</h4>
+                            <span class="text-xs text-gray-500">Just now</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-2">${formData.email}</p>
+                        <p class="text-gray-700">${formData.message}</p>
+                    `;
+                    
+                    // Add to top of message preview
+                    messagePreview.prepend(messageElement);
+                    
+                    // Show success message
+                    const successAlert = document.createElement('div');
+                    successAlert.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4';
+                    successAlert.innerHTML = `
+                        <div class="flex">
+                            <div class="py-1"><i class="fas fa-check-circle mr-2"></i></div>
+                            <div>
+                                <p class="font-medium">${data.message}</p>
+                                <p class="text-sm">I'll get back to you soon!</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Insert before the form
+                    this.parentNode.insertBefore(successAlert, this);
+                    
+                    // Remove success message after 5 seconds
+                    setTimeout(() => {
+                        successAlert.remove();
+                    }, 5000);
+                    
+                    // Reset form
+                    this.reset();
+                    
+                } else {
+                    throw new Error(data.message);
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                const errorAlert = document.createElement('div');
+                errorAlert.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4';
+                errorAlert.innerHTML = `
+                    <div class="flex">
+                        <div class="py-1"><i class="fas fa-exclamation-circle mr-2"></i></div>
+                        <div>
+                            <p class="font-medium">Failed to send message</p>
+                            <p class="text-sm">${error.message}</p>
+                        </div>
+                    </div>
+                `;
+                
+                this.parentNode.insertBefore(errorAlert, this);
+                setTimeout(() => {
+                    errorAlert.remove();
+                }, 5000);
+            } finally {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
