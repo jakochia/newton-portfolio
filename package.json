@@ -1,0 +1,11 @@
+﻿{
+  "name": "newton-portfolio",
+  "version": "1.0.0",
+  "description": "Static portfolio website",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [],
+  "author": "Newton Asha",
+  "license": "MIT"
+}
